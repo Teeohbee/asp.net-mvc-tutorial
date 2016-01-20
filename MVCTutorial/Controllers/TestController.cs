@@ -12,22 +12,24 @@ namespace MVCTutorial.Controllers
     {
         public ActionResult GetView()
         {
-            Employee emp = new Employee
-            {
-                FirstName = "Toby",
-                LastName = "Clarke",
-                Salary = 99999
-            };
+            EmployeeListViewModel employeeListViewModel = new EmployeeListViewModel();
 
-            EmployeeViewModel vmEmp = new EmployeeViewModel
-            {
-                EmployeeName = emp.FirstName + " " + emp.LastName,
-                Salary = emp.Salary.ToString("C"),
-                UserName = "Admin",
-                SalaryColor = emp.Salary > 15000 ? "yellow" : "green"
-            };
+            EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
+            List<Employee> employees = empBal.GetEmployees();
 
-            return View("MyView", vmEmp);
+            List<EmployeeViewModel> empViewModels = new List<EmployeeViewModel>();
+
+            foreach (Employee emp in employees)
+            {
+                EmployeeViewModel empViewModel = new EmployeeViewModel();
+                empViewModel.EmployeeName = emp.FirstName + " " + emp.LastName;
+                empViewModel.Salary = emp.Salary.ToString("C");
+                empViewModel.SalaryColor = emp.Salary > 15000 ? "yellow" : "green";
+                empViewModels.Add(empViewModel);
+            }
+            employeeListViewModel.Employees = empViewModels;
+            employeeListViewModel.UserName = "Admin";
+            return View("MyView", employeeListViewModel);
         }
         public string GetString()
         {
