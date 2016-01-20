@@ -17,8 +17,7 @@ namespace MVCTutorial.Controllers
                 LastName = "Clarke",
                 Salary = 99999
             };
-            ViewBag.Employee = emp;
-            return View("MyView");
+            return View("MyView", emp);
         }
         public string GetString()
         {
