@@ -15,6 +15,7 @@ namespace MVCTutorial.Controllers
             EmployeeListViewModel employeeListViewModel = new EmployeeListViewModel();
 
             EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
+
             List<Employee> employees = empBal.GetEmployees();
 
             List<EmployeeViewModel> empViewModels = new List<EmployeeViewModel>();
