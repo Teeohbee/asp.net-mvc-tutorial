@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web;
 
 namespace MvcMovie.Controllers
 {
@@ -10,9 +11,10 @@ namespace MvcMovie.Controllers
             return "This is my default action...";
         }
         // GET: /HelloWorld/Welcome/ 
-        public string Welcome()
+        public string Welcome(string name, int ID = 1)
         {
-            return "This is the Welcome action method...";
+            return HttpUtility.HtmlEncode(
+                "Hello " + name + ", ID: " + ID);
         }
     }
 }
